@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список сотрудников</title>
+</head>
+<body>
+    <div th:switch="${users}">
+        <h2 th:case="null">Пока нет ни одного сотрудника!</h2>
+        <div th:case="*">
+            <h2>Сотрудники</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Отчество</th>
+                    <th>Редактировать</th>
+                    <th>Удалить</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+                    <td th:text="${user.middleName}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${user.id})}">Редактировать</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${user.id})}">Удалить</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/signup">Добавить нового сотрудника</a></p>
+    </div>
+
+    <div th:switch="${responsibilities}">
+        <h2 th:case="null">Пока нет ни одной обязанности!</h2>
+        <div th:case="*">
+            <h2>Обязанности</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Заместитель</th>
+                    <th>Ссылка</th>
+                    <th>Описание</th>
+                    <th>Редактировать</th>
+                    <th>Удалить</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="responsibility : ${responsibilities}">
+                    <td th:text="${responsibility.deputyId}"></td>
+                    <td th:text="${responsibility.link}"></td>
+                    <td th:text="${responsibility.description}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${responsibility.id})}">Редактировать</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${responsibility.id})}">Удалить</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/add-responsibility">Добавить новую обязанность</a></p>
+    </div>
+</body>
+</html>
