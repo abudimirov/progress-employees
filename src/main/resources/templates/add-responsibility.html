@@ -6,12 +6,16 @@
 </head>
 <body>
 <form action="#" th:action="@{/add-responsibility}" th:object="${responsibility}" method="post">
-    <label for="user.id">Владелец</label>
-    <input type="text" th:field="*{user.id}" id="user.id" placeholder="Владелец">
-    <span th:if="${#fields.hasErrors('user.id')}" th:errors="*{user.id}"></span>
+    <label for="user_id">Владелец</label>
+    <select th:field="*{user.id}" id="user_id">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
+    </select>
     <label for="deputyId">Заместитель</label>
-    <input type="text" th:field="*{deputyId}" id="deputyId" placeholder="Заместитель">
-    <span th:if="${#fields.hasErrors('deputyId')}" th:errors="*{deputyId}"></span>
+    <select th:field="*{deputyId}" id="deputyId">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
+    </select>
+<!--    <input type="text" th:field="*{deputyId}" id="deputyId" placeholder="Заместитель">
+    <span th:if="${#fields.hasErrors('deputyId')}" th:errors="*{deputyId}"></span>-->
     <label for="link">Ссылка *</label>
     <input type="text" th:field="*{link}" id="link" placeholder="Ссылка">
     <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>

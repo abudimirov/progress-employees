@@ -40,6 +40,7 @@
             <table>
                 <thead>
                 <tr>
+                    <th>Владелец</th>
                     <th>Заместитель</th>
                     <th>Ссылка</th>
                     <th>Описание</th>
@@ -49,6 +50,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="responsibility : ${responsibilities}">
+                    <td th:text="${responsibility.user.id}"></td>
                     <td th:text="${responsibility.deputyId}"></td>
                     <td th:text="${responsibility.link}"></td>
                     <td th:text="${responsibility.description}"></td>

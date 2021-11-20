@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.progressnw.employees.model.Responsibility;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
+import ru.progressnw.employees.repository.UserRepository;
 
 import javax.validation.Valid;
 
@@ -15,9 +16,11 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class ResponsibilityController {
     private final ResponsibilityRepository responsibilityRepository;
+    private final UserRepository userRepository;
 
     @GetMapping("/add-responsibility")
-    public String showNewResponsibilityForm(Responsibility responsibility) {
+    public String showNewResponsibilityForm(Responsibility responsibility, Model model) {
+        model.addAttribute("users", userRepository.findAll());
         return "add-responsibility";
     }
 
