@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Добавить обязанность</title>
+<head th:replace="fragments/header :: page_header(pageTitle='Добавить обязанность')">
 </head>
 <body>
 <form action="#" th:action="@{/add-responsibility}" th:object="${responsibility}" method="post">
