@@ -39,6 +39,7 @@ public class AdminController {
     public String showUserList(Model model) {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("responsibilities", responsibilityRepository.findAll());
+
         return "index";
     }
 
