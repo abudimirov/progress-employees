@@ -22,7 +22,4 @@ public class User {
     private String surname;
 
     private String middleName;
-/*
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<Responsibility> responsibilitySet;*/
 }

@@ -10,8 +10,8 @@
     <select th:field="*{user.id}" id="user_id">
         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
     </select>
-    <label for="deputyId">Заместитель</label>
-    <select th:field="*{deputyId}" id="deputyId">
+    <label for="deputy_id">Заместитель</label>
+    <select th:field="*{deputy}" id="deputy_id">
         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
     </select>
     <label for="link">Ссылка *</label>

@@ -14,14 +14,16 @@ public class Responsibility {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private long deputyId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "deputy_user_id", nullable = false)
+    private User deputy;
 
     @NotBlank(message = "Необходимо добавить ссылку")
     private String link;
 
     private String description;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 }
