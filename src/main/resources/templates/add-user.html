@@ -11,7 +11,7 @@
         <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
         <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
         <label for="middleName">Отчество</label>
-        <input type="text" th:field="*{middleName}" id="middleName" placeholder="Отчество">
+        <input type="text" th:field="*{middlename}" id="middleName" placeholder="Отчество">
         <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></span>
         <label for="username">Логин</label>
         <input type="text" th:field="*{username}" id="username" placeholder="Логин">

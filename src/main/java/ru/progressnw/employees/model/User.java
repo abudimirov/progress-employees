@@ -16,12 +16,12 @@ public class User {
     private long id;
 
     //@NotBlank(message = "Имя - обязательное поле")
-    private String name;
+    private String firstname;
 
     //@NotBlank(message = "Фамилия - обязательное поле")
-    private String surname;
+    private String lastname;
 
-    private String middleName;
+    private String middlename;
 
     private String username;
     private String password;

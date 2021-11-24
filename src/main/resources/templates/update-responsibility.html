@@ -9,11 +9,11 @@
       method="post">
     <label for="user_id">Владелец</label>
     <select th:field="*{user.id}" id="user_id">
-        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
     </select>
     <label for="deputyId">Заместитель</label>
-    <select th:field="*{deputyId}" id="deputyId">
-        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.surname + ' ' + user.name}"></option>
+    <select th:field="*{deputy}" id="deputyId">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
     </select>
     <label for="link">Ссылка *</label>
     <input type="text" th:field="*{link}" id="link" placeholder="Ссылка">
