@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments/header :: page_header(pageTitle='Добавить сотрудника')">
 </head>
 <body>
@@ -13,6 +13,13 @@
         <label for="middleName">Отчество</label>
         <input type="text" th:field="*{middleName}" id="middleName" placeholder="Отчество">
         <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></span>
+        <label for="username">Логин</label>
+        <input type="text" th:field="*{username}" id="username" placeholder="Логин">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        <label for="password">Логин</label>
+        <input type="text" th:field="*{password}" id="password" placeholder="Пароль">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <input type="checkbox" th:field="*{active}" id="active" checked="checked">
 
         <input type="submit" value="Добавить сотрудника">
     </form>
