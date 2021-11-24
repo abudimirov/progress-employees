@@ -32,15 +32,15 @@ public class AdminController {
         }
 
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/")
+    @GetMapping("/admin")
     public String showUserList(Model model) {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("responsibilities", responsibilityRepository.findAll());
 
-        return "index";
+        return "admin";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,7 +61,7 @@ public class AdminController {
         }
 
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/delete/{id}")
@@ -69,6 +69,6 @@ public class AdminController {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 }
