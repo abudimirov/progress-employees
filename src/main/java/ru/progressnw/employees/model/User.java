@@ -15,15 +15,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@NotBlank(message = "Имя - обязательное поле")
+    @NotBlank(message = "Имя обязательно для заполнения")
     private String firstname;
-
-    //@NotBlank(message = "Фамилия - обязательное поле")
+    @NotBlank(message = "Фамилия обязательно для заполнения")
     private String lastname;
-
     private String middlename;
-
+    @NotBlank(message = "Логин обязателен для заполнения")
     private String username;
+    @NotBlank(message = "Пароль обязателен для заполнения")
     private String password;
     private boolean active;
 

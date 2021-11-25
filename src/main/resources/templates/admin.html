@@ -10,22 +10,23 @@
                 <caption>Сотрудники</caption>
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Фамилия</th>
                     <th>Имя</th>
                     <th>Отчество</th>
+                    <th>Включен</th>
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="user : ${users}">
-                    <td th:text="${user.id}"></td>
                     <td th:text="${user.lastname}"></td>
                     <td th:text="${user.firstname}"></td>
                     <td th:text="${user.middlename}"></td>
+                    <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
+
                     <td><a th:href="@{/edit/{id}(id=${user.id})}">Редактировать</a></td>
-                    <td><a th:href="@{/delete/{id}(id=${user.id})}">Удалить</a></td>
+                    <td><a th:href="@{/disable/{id}(id=${user.id})}">Заблокировать</a></td>
                 </tr>
                 </tbody>
             </table>

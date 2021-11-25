@@ -2,25 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Spring Security Example </title>
+  <title>Добавить сотрудника</title>
 </head>
 <body>
-<div th:if="${param.error}">
-  Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-  You have been logged out.
-</div>
-<div th:if="${param.message}">
-  <p th:text="${param.message}"></p>
-</div>
-<form th:action="@{/registration}" method="post">
-  <div><label> Имя: <input type="text" name="firstname"/> </label></div>
-  <div><label> Фамилия: <input type="text" name="lastname"/> </label></div>
-  <div><label> Отчество: <input type="text" name="middlename"/> </label></div>
-  <div><label> Логин: <input type="text" name="username"/> </label></div>
-  <div><label> Пароль: <input type="password" name="password"/> </label></div>
-  <div><input type="submit" value="Register"/></div>
+<p>Поля, помеченные * обязательны для заполнения</p>
+<form action="#" th:action="@{/registration}" th:object="${user}" method="post">
+  <label for="firstname">Имя *</label>
+  <input type="text" th:field="*{firstname}" id="firstname" placeholder="Имя">
+  <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+
+  <label for="lastname">Фамилия *</label>
+  <input type="text" th:field="*{lastname}" id="lastname" placeholder="Фамилия">
+  <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+
+  <label for="middlename">Отчество</label>
+  <input type="text" th:field="*{middlename}" id="middlename" placeholder="Отчество">
+  <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
+
+  <label for="username">Логин *</label>
+  <input type="text" th:field="*{username}" id="username" placeholder="Логин">
+  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+  <label for="password">Пароль *</label>
+  <input type="text" th:field="*{password}" id="password" placeholder="Пароль">
+  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+  <input type="submit" value="Добавить сотрудника">
 </form>
 </body>
 </html>

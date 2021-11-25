@@ -20,21 +20,6 @@ public class AdminController {
     private final UserRepository userRepository;
     private final ResponsibilityRepository responsibilityRepository;
 
-    @GetMapping("/signup")
-    public String showSignUpForm(User user) {
-        return "add-user";
-    }
-
-    @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-user";
-        }
-
-        userRepository.save(user);
-        return "redirect:/admin";
-    }
-
     @GetMapping("/admin")
     public String showUserList(Model model) {
         model.addAttribute("users", userRepository.findAll());
@@ -64,11 +49,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    @GetMapping("/disable/{id}")
+    public String disableUser(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
+        user.setActive(false);
+        userRepository.save(user);
         return "redirect:/admin";
     }
 }

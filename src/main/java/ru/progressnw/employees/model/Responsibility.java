@@ -14,11 +14,11 @@ public class Responsibility {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "deputy_user_id", nullable = false)
     private User deputy;
 

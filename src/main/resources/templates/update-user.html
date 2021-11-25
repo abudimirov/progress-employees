@@ -3,20 +3,16 @@
 <head th:replace="fragments/header :: page_header(pageTitle='Изменить данные сотрудника')">
 </head>
 <body>
-<form action="#"
-      th:action="@{/update/{id}(id=${user.id})}"
-      th:object="${user}"
-      method="post">
-    <label for="name">Имя *</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Имя">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    <label for="surname">Фамилия *</label>
-    <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
-    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
-    <label for="middleName">Отчество</label>
-    <input type="text" th:field="*{middleName}" id="middleName" placeholder="Отчество">
-    <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></span>
-    <input type="submit" value="Сохранить информацию">
+<form th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <div><label> Логин: <input type="text" disabled th:field="*{username}" value="*{username}" name="username"/> </label></div>
+    <div><label> Пароль: <input type="text" disabled th:field="*{password}" value="*{password}" name="password"/> </label></div>
+
+    <div><label> Имя: <input type="text" th:field="*{firstname}" name="firstname" /> </label></div>
+    <div><label> Фамилия: <input type="text" th:field="*{lastname}" name="lastname"/> </label></div>
+    <div><label> Отчество: <input type="text" th:field="*{middlename}" name="middlename"/> </label></div>
+    <div><label> Активен: <input type="checkbox" th:field="*{active}" name="active"/> </label></div>
+
+    <div><input type="submit" value="Сохранить информацию"/></div>
 </form>
 </body>
 </html>
