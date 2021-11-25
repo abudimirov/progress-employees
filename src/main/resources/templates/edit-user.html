@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Редактировать данные сотрудника</title>
+</head>
+<body>
+<p>Поля, помеченные * обязательны для заполнения</p>
+<form action="#" th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" method="post">
+  <label for="firstname">Имя *</label>
+  <input type="text" th:field="*{firstname}" id="firstname" placeholder="Имя">
+  <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+
+  <label for="lastname">Фамилия *</label>
+  <input type="text" th:field="*{lastname}" id="lastname" placeholder="Фамилия">
+  <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+
+  <label for="middlename">Отчество</label>
+  <input type="text" th:field="*{middlename}" id="middlename" placeholder="Отчество">
+  <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
+
+  <label for="username">Логин *</label>
+  <input type="text" th:field="*{username}" id="username" placeholder="Логин">
+  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+  <label for="password">Пароль *</label>
+  <input type="text" th:field="*{password}" id="password" placeholder="Пароль">
+  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+  <label for="active">Активирован?</label>
+  <input type="checkbox" th:field="*{active}" id="active">
+  <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
+
+
+
+  <input type="submit" value=Обновить данные>
+</form>
+</body>
+</html>

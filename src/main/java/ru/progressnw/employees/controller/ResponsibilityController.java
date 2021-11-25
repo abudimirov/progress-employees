@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.progressnw.employees.model.Responsibility;
-import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
 import ru.progressnw.employees.repository.UserRepository;
 

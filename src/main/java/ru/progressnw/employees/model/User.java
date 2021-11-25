@@ -20,8 +20,11 @@ public class User {
     @NotBlank(message = "Фамилия обязательно для заполнения")
     private String lastname;
     private String middlename;
+
     @NotBlank(message = "Логин обязателен для заполнения")
+    @Column(unique = true)
     private String username;
+
     @NotBlank(message = "Пароль обязателен для заполнения")
     private String password;
     private boolean active;
