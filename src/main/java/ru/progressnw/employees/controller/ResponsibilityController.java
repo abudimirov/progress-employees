@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.progressnw.employees.model.Responsibility;
+import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
 import ru.progressnw.employees.repository.UserRepository;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,6 +53,8 @@ public class ResponsibilityController {
             responsibility.setId(id);
             return "update-responsibility";
         }
+        Optional<User> userInDb = userRepository.findById(responsibility.getUser().getId());
+        userInDb.ifPresent(responsibility::setUser);
 
         responsibilityRepository.save(responsibility);
         return "redirect:/";
