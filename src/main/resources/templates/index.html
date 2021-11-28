@@ -16,6 +16,7 @@
 
         <div class="col-md-3 text-end">
             <div sec:authorize="isAuthenticated()">
+
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-secondary" value="Выйти из аккаунта">Выйти из аккаунта</button>
                 </form>
@@ -27,5 +28,38 @@
     </header>
 </div>
 
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+    <div th:switch="${myResponsibility}">
+        <h2 th:case="null">Пожалуйста, войдите в свой аккаунт</h2>
+        <div th:case="*" class="table-responsive">
+            <table class="table caption-top">
+                <caption>Мои обязанности</caption>
+                <thead>
+                <tr>
+                    <th>Исполнитель</th>
+                    <th>Заместитель</th>
+                    <th>Ссылка</th>
+                    <th>Описание</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="responsibility : ${myResponsibility}">
+                    <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                    <td th:text="${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename}"></td>
+                    <td th:text="${responsibility.link}"></td>
+                    <td th:text="${responsibility.description}"></td>
+                    <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
+                    <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <p><a href="/add-responsibility">Добавить новую обязанность</a></p>
+        </div>
+    </div>
+    </div>
+    </div>
 </body>
 </html>
