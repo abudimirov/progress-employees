@@ -32,6 +32,7 @@ public class MainController {
             User userInDb = userRepository.findByUsername(loggedUsername);
             responsibility = new ArrayList<>();
             responsibilityRepository.findByUser(userInDb).forEach(responsibility::add);
+            model.addAttribute("loggedInUser", userInDb);
         } else {
             responsibility = Collections.emptyList();
         }

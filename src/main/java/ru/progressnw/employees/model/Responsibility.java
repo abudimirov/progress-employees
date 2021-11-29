@@ -19,7 +19,7 @@ public class Responsibility {
     private User user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "deputy_user_id", nullable = false)
+    @JoinColumn(name = "deputy_user_id")
     private User deputy;
 
     @NotBlank(message = "Необходимо добавить ссылку")
