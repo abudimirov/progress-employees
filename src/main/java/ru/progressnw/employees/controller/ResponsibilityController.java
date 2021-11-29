@@ -1,6 +1,9 @@
 package ru.progressnw.employees.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +37,7 @@ public class ResponsibilityController {
         }
 
         responsibilityRepository.save(responsibility);
-        return "redirect:/";
+        return isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping("/edit-responsibility/{id}")
@@ -57,7 +60,7 @@ public class ResponsibilityController {
         userInDb.ifPresent(responsibility::setUser);
 
         responsibilityRepository.save(responsibility);
-        return "redirect:/";
+        return isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping("/delete-responsibility/{id}")
@@ -65,6 +68,15 @@ public class ResponsibilityController {
         Responsibility responsibility = responsibilityRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Invalid responsibility Id:" + id));
         responsibilityRepository.delete(responsibility);
-        return "redirect:/";
+        return isAdmin() ? "redirect:/admin" : "redirect:/";
+    }
+
+    private boolean isAdmin() {
+        boolean isAdmin = false;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            isAdmin = authentication.getName().equals("admin");
+        }
+        return isAdmin;
     }
 }

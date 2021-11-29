@@ -16,7 +16,7 @@
 
         <div class="col-md-3 text-end">
             <div sec:authorize="isAuthenticated()">
-                <p th:text="${loggedInUser.getFirstname() + ' ' + loggedInUser.getLastname()}"></p>
+                <p th:text="${loggedInUser.getLastname() + ' ' + loggedInUser.getFirstname()}"></p>
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="btn btn-secondary" value="Выйти из аккаунта">Выйти из аккаунта</button>
                 </form>
