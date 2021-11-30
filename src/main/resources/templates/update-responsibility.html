@@ -3,33 +3,36 @@
 <head th:replace="fragments/header :: page_header(pageTitle='Изменить обязанность')">
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center">
-    <div class="container w-50 p-3">
-        <h2>Редактировать обязанность</h2>
-        <form action="#"
-              th:action="@{/update-responsibility/{id}(id=${responsibility.id})}"
-              th:object="${responsibility}"
-              method="post">
-            <div class="mb-3">
-                <label for="user_id" class="form-label">Исполнитель</label>
-                <select class="form-select" th:field="*{user.id}" id="user_id">
-                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
-                </select>
-                <label for="deputyId" class="form-label">Заместитель</label>
-                <select class="form-select" th:field="*{deputy}" id="deputyId">
-                    <option th:value="null">Отсутствует</option>
-                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
-                </select>
-                <label for="link" class="form-label">Ссылка *</label>
-                <input type="text" class="form-control" th:field="*{link}" id="link" placeholder="Ссылка">
-                <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
-                <label for="description" class="form-label">Описание</label>
-                <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Описание">
-                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    <div class="container">
+        <header th:replace="fragments/nav-header :: nav_header"></header>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="container w-50 p-3">
+                <h2>Редактировать обязанность</h2>
+                <form action="#"
+                      th:action="@{/update-responsibility/{id}(id=${responsibility.id})}"
+                      th:object="${responsibility}"
+                      method="post">
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label">Исполнитель</label>
+                        <select class="form-select" th:field="*{user.id}" id="user_id">
+                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
+                        </select>
+                        <label for="deputyId" class="form-label">Заместитель</label>
+                        <select class="form-select" th:field="*{deputy}" id="deputyId">
+                            <option th:value="null">Отсутствует</option>
+                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
+                        </select>
+                        <label for="link" class="form-label">Ссылка *</label>
+                        <input type="text" class="form-control" th:field="*{link}" id="link" placeholder="Ссылка">
+                        <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
+                        <label for="description" class="form-label">Описание</label>
+                        <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Описание">
+                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить информацию</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить информацию</button>
-        </form>
+        </div>
     </div>
-</div>
 </body>
 </html>

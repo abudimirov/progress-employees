@@ -4,34 +4,37 @@
 <head th:replace="fragments/header :: page_header(pageTitle='Добавить сотрудника')">
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center">
-  <div class="container w-50 p-3">
-    <h2>Зарегистрировать нового сотрудника</h2>
-    <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
-      <p>Поля, помеченные * обязательны для заполнения</p>
-      <div class="mb-3">
-        <label for="firstname" class="form-label">Имя *</label>
-        <input type="text" class="form-control" th:field="*{firstname}" id="firstname" placeholder="Имя">
-        <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+<div class="container">
+  <header th:replace="fragments/nav-header :: nav_header"></header>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="container w-50 p-3">
+      <h2>Зарегистрировать нового сотрудника</h2>
+      <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
+        <p>Поля, помеченные * обязательны для заполнения</p>
+        <div class="mb-3">
+          <label for="firstname" class="form-label">Имя *</label>
+          <input type="text" class="form-control" th:field="*{firstname}" id="firstname" placeholder="Имя">
+          <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
 
-        <label for="lastname" class="form-label">Фамилия *</label>
-        <input type="text" class="form-control" th:field="*{lastname}" id="lastname" placeholder="Фамилия">
-        <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+          <label for="lastname" class="form-label">Фамилия *</label>
+          <input type="text" class="form-control" th:field="*{lastname}" id="lastname" placeholder="Фамилия">
+          <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
 
-        <label for="middlename" class="form-label">Отчество</label>
-        <input type="text" class="form-control"  th:field="*{middlename}" id="middlename" placeholder="Отчество">
-        <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
+          <label for="middlename" class="form-label">Отчество</label>
+          <input type="text" class="form-control"  th:field="*{middlename}" id="middlename" placeholder="Отчество">
+          <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
 
-        <label for="username" class="form-label">Логин *</label>
-        <input type="text" class="form-control"  th:field="*{username}" id="username" placeholder="Логин">
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+          <label for="username" class="form-label">Логин *</label>
+          <input type="text" class="form-control"  th:field="*{username}" id="username" placeholder="Логин">
+          <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 
-        <label for="password" class="form-label">Пароль *</label>
-        <input type="text" class="form-control"  th:field="*{password}" id="password" placeholder="Пароль">
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-      </div>
-      <button type="submit" class="btn btn-primary">Добавить сотрудника</button>
-    </form>
+          <label for="password" class="form-label">Пароль *</label>
+          <input type="text" class="form-control"  th:field="*{password}" id="password" placeholder="Пароль">
+          <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить сотрудника</button>
+      </form>
+    </div>
   </div>
 </div>
 </body>

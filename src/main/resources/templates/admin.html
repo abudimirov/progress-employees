@@ -4,6 +4,8 @@
 </head>
 <body>
     <div class="container">
+        <header th:replace="fragments/nav-header :: nav_header"></header>
+
         <div th:switch="${users}">
             <h2 th:case="null">Пока нет ни одного сотрудника!</h2>
             <div th:case="*" class="table-responsive">

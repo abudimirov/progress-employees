@@ -12,5 +12,6 @@ import java.util.List;
 public interface ResponsibilityRepository extends JpaRepository<Responsibility, Long> {
     List<Responsibility> findAllByOrderByDescription();
     List<Responsibility> findByUser(User user);
+    List<Responsibility> findByDeputy(User user);
 }
 

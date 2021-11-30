@@ -3,63 +3,71 @@
 <head th:replace="fragments/header :: page_header(pageTitle='Мои обязанности')">
 </head>
 <body>
-<div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
+    <div class="container">
+        <header th:replace="fragments/nav-header :: nav_header"></header>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/admin" class="nav-link px-2 link-dark">Админ-панель</a></li>
-            <li><a href="/registration" class="nav-link px-2 link-dark">Зарегистрировать сотрудника</a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-            <div sec:authorize="isAuthenticated()">
-                <p th:text="${loggedInUser.getLastname() + ' ' + loggedInUser.getFirstname()}"></p>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-secondary" value="Выйти из аккаунта">Выйти из аккаунта</button>
-                </form>
-            </div>
-            <div sec:authorize="isAnonymous()">
-                <a href="/login" class="btn btn-primary">Войти в аккаунт</a>
+        <div sec:authorize="isAuthenticated()">
+            <div th:switch="${myResponsibility}">
+                <h2 th:case="null">Пожалуйста, войдите в свой аккаунт</h2>
+                <div th:case="*" class="table-responsive">
+                    <table class="table caption-top">
+                        <caption>Мои обязанности</caption>
+                        <thead>
+                        <tr>
+                            <th>Исполнитель</th>
+                            <th>Заместитель</th>
+                            <th>Ссылка</th>
+                            <th>Описание</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="responsibility : ${myResponsibility}">
+                            <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                            <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                            <td th:text="${responsibility.link}"></td>
+                            <td th:text="${responsibility.description}"></td>
+                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
+                            <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p><a href="/add-responsibility">Добавить новую обязанность</a></p>
+                </div>
             </div>
         </div>
-    </header>
-</div>
 
-<div class="container">
-    <div sec:authorize="isAuthenticated()">
-    <div th:switch="${myResponsibility}">
-        <h2 th:case="null">Пожалуйста, войдите в свой аккаунт</h2>
-        <div th:case="*" class="table-responsive">
-            <table class="table caption-top">
-                <caption>Мои обязанности</caption>
-                <thead>
-                <tr>
-                    <th>Исполнитель</th>
-                    <th>Заместитель</th>
-                    <th>Ссылка</th>
-                    <th>Описание</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="responsibility : ${myResponsibility}">
-                    <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
-                    <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
-                    <td th:text="${responsibility.link}"></td>
-                    <td th:text="${responsibility.description}"></td>
-                    <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
-                    <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
-                </tr>
-                </tbody>
-            </table>
-            <p><a href="/add-responsibility">Добавить новую обязанность</a></p>
+        <div sec:authorize="isAuthenticated()">
+            <div th:switch="${deputyResponsibility}">
+                <h2 th:case="null">Список обязанностей пуст</h2>
+                <div th:case="*" class="table-responsive">
+                    <table class="table caption-top">
+                        <caption>Мои обязанности как заместителя</caption>
+                        <thead>
+                        <tr>
+                            <th>Исполнитель</th>
+                            <th>Заместитель</th>
+                            <th>Ссылка</th>
+                            <th>Описание</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="responsibility : ${deputyResponsibility}">
+                            <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                            <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                            <td th:text="${responsibility.link}"></td>
+                            <td th:text="${responsibility.description}"></td>
+                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
+                            <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 </body>
 </html>
