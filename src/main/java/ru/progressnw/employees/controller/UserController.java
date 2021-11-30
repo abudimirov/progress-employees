@@ -19,6 +19,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class UserController {
 
+    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/registration")
