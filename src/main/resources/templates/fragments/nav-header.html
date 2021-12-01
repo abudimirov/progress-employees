@@ -7,12 +7,13 @@
 <body>
     <header th:fragment="nav_header" class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <img th:src="@{/img/logo.svg}" alt="Развитие"/>
+            <span>Развитие</span>
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li sec:authorize="hasRole('ADMIN')"><a href="/admin" class="nav-link px-2 link-dark">Админ-панель</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/registration" class="nav-link px-2 link-dark">Зарегистрировать сотрудника</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a href="/add-responsibility" class="nav-link px-2 link-dark">Добавить обязанность</a></li>
         </ul>
 
         <div class="col-md-3 text-end">

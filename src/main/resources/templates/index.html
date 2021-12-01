@@ -5,10 +5,13 @@
 <body>
     <div class="container">
         <header th:replace="fragments/nav-header :: nav_header"></header>
-
+        <div sec:authorize="hasRole('ADMIN')">
+            <h2>Администратор не имеет обязанностей</h2>
+            <h3>Эта страница для обязанностей сотрудников. Вернитесь в <a href="/admin">админ-панель</a></h3>
+        </div>
         <div sec:authorize="isAuthenticated()">
-            <div th:switch="${myResponsibility}">
-                <h2 th:case="null">Пожалуйста, войдите в свой аккаунт</h2>
+            <div sec:authorize="!hasRole('ADMIN')" th:switch="${myResponsibility}">
+                <h2 th:case="null">Список обязанностей пуст</h2>
                 <div th:case="*" class="table-responsive">
                     <table class="table caption-top">
                         <caption>Мои обязанности</caption>
@@ -39,7 +42,7 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            <div th:switch="${deputyResponsibility}">
+            <div sec:authorize="!hasRole('ADMIN')" th:switch="${deputyResponsibility}">
                 <h2 th:case="null">Список обязанностей пуст</h2>
                 <div th:case="*" class="table-responsive">
                     <table class="table caption-top">
