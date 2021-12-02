@@ -40,9 +40,8 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            <div sec:authorize="!hasRole('ADMIN')" th:switch="${deputyResponsibility}">
-                <h2 th:case="null">Список обязанностей пуст</h2>
-                <div th:case="*" class="table-responsive">
+            <div sec:authorize="!hasRole('ADMIN')" th:unless="${#lists.isEmpty(deputyResponsibility)}">
+                <div class="table-responsive">
                     <table class="table caption-top">
                         <caption>Мои обязанности как заместителя</caption>
                         <thead>
