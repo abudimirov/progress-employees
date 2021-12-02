@@ -17,6 +17,7 @@
                         <th>Имя</th>
                         <th>Отчество</th>
                         <th>Включен</th>
+                        <th>Фильтровать</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -27,6 +28,7 @@
                         <td th:text="${user.firstname}"></td>
                         <td th:text="${user.middlename}"></td>
                         <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
+                        <td><a th:href="@{/filter/{id}(id=${user.id})}">Выбрать</a></td>
                         <td><a th:href="@{/users/{id}(id=${user.id})}">Редактировать</a></td>
                         <td><a th:href="@{/disable/{id}(id=${user.id})}">Заблокировать</a></td>
                     </tr>
@@ -36,11 +38,35 @@
             <p><a href="/registration">Зарегистрировать нового сотрудника</a></p>
         </div>
 
-        <div th:switch="${responsibilities}">
-            <h2 th:case="null">Пока нет ни одной обязанности!</h2>
-            <div th:case="*" class="table-responsive">
+        <div th:switch="${filteredResponsibility}">
+            <div th:unless="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
                 <table class="table caption-top">
-                    <caption>Обязанности</caption>
+                    <caption>Фильтрованные обязанности</caption>
+                    <thead>
+                    <tr>
+                        <th>Исполнитель</th>
+                        <th>Заместитель</th>
+                        <th>Ссылка</th>
+                        <th>Описание</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="responsibility : ${filteredResponsibility}">
+                        <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                        <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                        <td th:text="${responsibility.link}"></td>
+                        <td th:text="${responsibility.description}"></td>
+                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
+                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
+                <table class="table caption-top">
+                    <caption>Все добавленные обязанности</caption>
                     <thead>
                     <tr>
                         <th>Исполнитель</th>

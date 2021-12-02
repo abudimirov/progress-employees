@@ -22,7 +22,6 @@
                             <th>Ссылка</th>
                             <th>Описание</th>
                             <th></th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,7 +31,6 @@
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
                             <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
-                            <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -54,7 +52,6 @@
                             <th>Ссылка</th>
                             <th>Описание</th>
                             <th></th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -64,7 +61,6 @@
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
                             <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
-                            <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
                         </tr>
                         </tbody>
                     </table>

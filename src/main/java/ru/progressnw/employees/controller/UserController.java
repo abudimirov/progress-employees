@@ -12,8 +12,10 @@ import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.UserRepository;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Resource(name = "filteredUsers")
+    private List<User> filteredUsersList;
 
     @GetMapping("/registration")
     public String registration(User user) {
@@ -69,6 +74,18 @@ public class UserController {
             .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.setActive(false);
         userRepository.save(user);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/filter/{id}")
+    public String filterUser(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        if (filteredUsersList.contains(user)) {
+            filteredUsersList.remove(user);
+        } else {
+            filteredUsersList.add(user);
+        }
         return "redirect:/admin";
     }
 }
