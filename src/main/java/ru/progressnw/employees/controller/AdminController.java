@@ -33,7 +33,7 @@ public class AdminController {
         model.addAttribute("responsibilities", responsibilityRepository.findAll(Sort.by(Sort.Direction.ASC, "user.lastname")
             .and(Sort.by(Sort.Direction.ASC, "description"))));
         model.addAttribute("filteredResponsibility", responsibilityService.getResponsibilityListByUsers(filteredUsersList));
-
+        model.addAttribute("filteredUsers", filteredUsersList);
         return "admin";
     }
 }

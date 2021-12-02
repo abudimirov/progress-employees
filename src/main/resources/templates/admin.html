@@ -28,7 +28,7 @@
                         <td th:text="${user.firstname}"></td>
                         <td th:text="${user.middlename}"></td>
                         <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
-                        <td><a th:href="@{/filter/{id}(id=${user.id})}">Выбрать</a></td>
+                        <td><a th:href="@{/filter/{id}(id=${user.id})}"><span th:text="${#lists.contains(filteredUsers, user) ? 'Убрать' : 'Выбрать'}">Кнопка</span></a></td>
                         <td><a th:href="@{/users/{id}(id=${user.id})}">Редактировать</a></td>
                         <td><a th:href="@{/disable/{id}(id=${user.id})}">Заблокировать</a></td>
                     </tr>
