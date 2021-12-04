@@ -47,6 +47,7 @@
                         <thead>
                         <tr>
                             <th>Исполнитель</th>
+                            <th>Должность</th>
                             <th>Заместитель</th>
                             <th>Ссылка</th>
                             <th>Описание</th>
@@ -56,6 +57,7 @@
                         <tbody>
                         <tr th:each="responsibility : ${deputyResponsibility}">
                             <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                            <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                             <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>

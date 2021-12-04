@@ -24,6 +24,10 @@
           <input type="text" class="form-control" th:field="*{middlename}" id="middlename" placeholder="Отчество">
           <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
 
+          <label for="jobTitle" class="form-label">Должность</label>
+          <input type="text" class="form-control"  th:field="*{jobTitle}" id="jobTitle" placeholder="Должность">
+          <span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></span>
+
           <label for="username" class="form-label">Логин *</label>
           <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Логин">
           <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
