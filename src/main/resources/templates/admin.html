@@ -9,7 +9,7 @@
         <div th:switch="${users}">
             <h2 th:case="null">Пока нет ни одного сотрудника!</h2>
             <div th:case="*" class="table-responsive">
-                <table class="table caption-top">
+                <table class="table table-striped caption-top">
                     <caption>Сотрудники</caption>
                     <thead>
                     <tr>
@@ -39,7 +39,7 @@
 
         <div th:switch="${filteredResponsibility}">
             <div th:unless="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
-                <table class="table caption-top">
+                <table class="table table-striped caption-top">
                     <caption>Фильтрованные обязанности</caption>
                     <thead>
                     <tr>
@@ -85,7 +85,7 @@
                     <strong>У выбранных пользователей нет обязанностей!</strong> Ниже все обязанности сотрудников
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <table class="table caption-top">
+                <table class="table table-striped caption-top">
                     <caption>Все добавленные обязанности</caption>
                     <thead>
                     <tr>

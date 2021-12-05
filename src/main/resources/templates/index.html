@@ -13,7 +13,7 @@
             <div sec:authorize="!hasRole('ADMIN')" th:switch="${myResponsibility}">
                 <h2 th:case="null">Список обязанностей пуст</h2>
                 <div th:case="*" class="table-responsive">
-                    <table class="table caption-top">
+                    <table class="table table-striped caption-top">
                         <caption>Мои обязанности</caption>
                         <thead>
                         <tr>
@@ -51,7 +51,7 @@
         <div sec:authorize="isAuthenticated()">
             <div sec:authorize="!hasRole('ADMIN')" th:unless="${#lists.isEmpty(deputyResponsibility)}">
                 <div class="table-responsive">
-                    <table class="table caption-top">
+                    <table class="table table-striped caption-top">
                         <caption>Мои обязанности как заместителя</caption>
                         <thead>
                         <tr>
