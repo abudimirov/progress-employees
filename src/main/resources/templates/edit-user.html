@@ -36,11 +36,11 @@
           <input type="text" class="form-control" th:field="*{password}" id="password" placeholder="Пароль">
           <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 
-          <label for="active" class="form-label">Активирован?</label>
+          <label for="active" class="form-label">Включен?</label>
           <input type="checkbox" class="form-check-input" th:field="*{active}" id="active">
           <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Обновить данные</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Обновить данные</button>
       </form>
     </div>
   </div>

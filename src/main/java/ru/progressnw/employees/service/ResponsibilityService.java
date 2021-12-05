@@ -7,7 +7,6 @@ import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,8 +18,7 @@ public class ResponsibilityService {
     public List<Responsibility> getResponsibilityListByUsers(List<User> users) {
         List<Responsibility> responsibilities = new ArrayList<>();
         for (User user : users) {
-            List<Responsibility> temp = responsibilityRepository.findByUser(user);
-            responsibilities.addAll(temp);
+            responsibilities.addAll(responsibilityRepository.findByUser(user));
         }
         return responsibilities;
     }

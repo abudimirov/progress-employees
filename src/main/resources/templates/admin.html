@@ -20,7 +20,6 @@
                         <th>Включен</th>
                         <th>Фильтровать</th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,12 +31,10 @@
                         <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
                         <td><a th:href="@{/filter/{id}(id=${user.id})}"><span th:text="${#lists.contains(filteredUsers, user) ? 'Убрать' : 'Выбрать'}">Кнопка</span></a></td>
                         <td><a th:href="@{/users/{id}(id=${user.id})}">Редактировать</a></td>
-                        <td><a th:href="@{/disable/{id}(id=${user.id})}">Заблокировать</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p><a href="/registration">Зарегистрировать нового сотрудника</a></p>
         </div>
 
         <div th:switch="${filteredResponsibility}">
@@ -62,13 +59,17 @@
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
-                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
-                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div th:if="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
+                <div th:unless="${#lists.isEmpty(filteredUsers)}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>У выбранных пользователей нет обязанностей!</strong> Ниже все обязанности сотрудников
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 <table class="table caption-top">
                     <caption>Все добавленные обязанности</caption>
                     <thead>
@@ -89,13 +90,12 @@
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
-                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}">Редактировать</a></td>
-                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}">Удалить</a></td>
+                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p><a href="/add-responsibility">Добавить новую обязанность</a></p>
         </div>
     </div>
 </body>
