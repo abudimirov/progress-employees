@@ -26,4 +26,6 @@ public class Responsibility {
     private String link;
 
     private String description;
+
+    private boolean isBlocked;
 }

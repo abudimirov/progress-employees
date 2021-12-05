@@ -43,6 +43,7 @@
                     <caption>Фильтрованные обязанности</caption>
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Исполнитель</th>
                         <th>Должность</th>
                         <th>Заместитель</th>
@@ -54,13 +55,27 @@
                     </thead>
                     <tbody>
                     <tr th:each="responsibility : ${filteredResponsibility}">
+                        <td>
+                            <a th:href="@{/block-responsibility/{id}(id=${responsibility.id})}">
+                                <span th:if="${responsibility.isBlocked == true}"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                         <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
                         <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
-                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a></td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -74,6 +89,7 @@
                     <caption>Все добавленные обязанности</caption>
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Исполнитель</th>
                         <th>Должность</th>
                         <th>Заместитель</th>
@@ -85,13 +101,27 @@
                     </thead>
                     <tbody>
                     <tr th:each="responsibility : ${responsibilities}">
+                        <td>
+                            <a th:href="@{/block-responsibility/{id}(id=${responsibility.id})}">
+                                <span th:if="${responsibility.isBlocked == true}"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                         <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
                         <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
-                        <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                        <td><a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a></td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

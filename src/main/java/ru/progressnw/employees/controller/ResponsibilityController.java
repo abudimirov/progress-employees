@@ -71,6 +71,15 @@ public class ResponsibilityController {
         return isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
+    @GetMapping("/block-responsibility/{id}")
+    public String blockResponsibility(@PathVariable("id") long id, Model model) {
+        Responsibility responsibility = responsibilityRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid responsibility Id:" + id));
+        responsibility.setBlocked(!responsibility.isBlocked());
+        responsibilityRepository.save(responsibility);
+        return isAdmin() ? "redirect:/admin" : "redirect:/";
+    }
+
     private boolean isAdmin() {
         boolean isAdmin = false;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
