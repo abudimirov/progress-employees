@@ -30,7 +30,7 @@
                             <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
-                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -61,7 +61,7 @@
                             <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
-                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                            <td><a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
