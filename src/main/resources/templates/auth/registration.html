@@ -14,27 +14,27 @@
         <div class="mb-3">
           <label for="firstname" class="form-label">Имя *</label>
           <input type="text" class="form-control" th:field="*{firstname}" id="firstname" placeholder="Имя">
-          <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
 
           <label for="lastname" class="form-label">Фамилия *</label>
           <input type="text" class="form-control" th:field="*{lastname}" id="lastname" placeholder="Фамилия">
-          <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
 
           <label for="middlename" class="form-label">Отчество</label>
           <input type="text" class="form-control"  th:field="*{middlename}" id="middlename" placeholder="Отчество">
-          <span th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div>
 
           <label for="jobTitle" class="form-label">Должность</label>
           <input type="text" class="form-control"  th:field="*{jobTitle}" id="jobTitle" placeholder="Должность">
-          <span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></div>
 
           <label for="username" class="form-label">Логин *</label>
           <input type="text" class="form-control"  th:field="*{username}" id="username" placeholder="Логин">
-          <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 
           <label for="password" class="form-label">Пароль *</label>
           <input type="text" class="form-control"  th:field="*{password}" id="password" placeholder="Пароль">
-          <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+          <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         </div>
         <button type="submit" class="btn btn-primary">Добавить сотрудника</button>
       </form>

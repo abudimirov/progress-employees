@@ -9,6 +9,7 @@
             <div class="container w-50 p-3">
                 <h2>Добавить новую обязанность</h2>
                 <form action="#" th:action="@{/add-responsibility}" th:object="${responsibility}" method="post">
+                    <p>Поля, помеченные * обязательны для заполнения</p>
                     <div class="mb-3">
                         <label for="user_id" class="form-label">Исполнитель</label>
                         <select class="form-select" th:field="*{user.id}" id="user_id">
@@ -19,12 +20,12 @@
                             <option th:value="null">Отсутствует</option>
                             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
                         </select>
-                        <label for="link" class="form-label">Ссылка *</label>
+                        <label for="link" class="form-label">Ссылка</label>
                         <input type="text" class="form-control" th:field="*{link}" id="link" placeholder="Ссылка">
-                        <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></span>
-                        <label for="description" class="form-label">Описание</label>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></div>
+                        <label for="description" class="form-label">Описание *</label>
                         <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Описание">
-                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
                     </div>
                     <button type="submit" class="btn btn-primary">Добавить обязанность</button>
                 </form>

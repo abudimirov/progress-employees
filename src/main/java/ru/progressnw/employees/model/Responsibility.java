@@ -22,9 +22,9 @@ public class Responsibility {
     @JoinColumn(name = "deputy_user_id")
     private User deputy;
 
-    @NotBlank(message = "Необходимо добавить ссылку")
     private String link;
 
+    @NotBlank(message = "Необходимо добавить описание")
     private String description;
 
     private boolean isBlocked;
