@@ -58,7 +58,7 @@
                         <td>
                             <a th:href="@{/block-responsibility/{id}(id=${responsibility.id})}">
                                 <span th:if="${responsibility.isBlocked == true}"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock" aria-hidden="true"></i></span>
                             </a>
                         </td>
                         <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
@@ -73,7 +73,7 @@
                         </td>
                         <td>
                             <span th:unless="${responsibility.isBlocked}">
-                                <a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
+                                <a href="#" th:onclick="'javascript:deleteResponsibility(' + ${responsibility.id} + ');'" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
                             </span>
                         </td>
                     </tr>
@@ -104,7 +104,7 @@
                         <td>
                             <a th:href="@{/block-responsibility/{id}(id=${responsibility.id})}">
                                 <span th:if="${responsibility.isBlocked == true}"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock" aria-hidden="true"></i></span>
                             </a>
                         </td>
                         <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
@@ -119,7 +119,7 @@
                         </td>
                         <td>
                             <span th:unless="${responsibility.isBlocked}">
-                                <a th:href="@{/delete-responsibility/{id}(id=${responsibility.id})}" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
+                                <a href="#" th:onclick="'javascript:deleteResponsibility(' + ${responsibility.id} + ');'" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
                             </span>
                         </td>
                     </tr>
@@ -128,5 +128,32 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="deleteWindowModal" tabindex="-1" aria-labelledby="deleteWindowModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteWindowModalLabel">Удалить обязанность</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены что хотите удалить выбранную обязанность? Восстановление будет невозможно
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                    <a class="btn btn-danger" href="/delete-responsibility/" id="delete-responsibility-modal">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script>
+    function deleteResponsibility(id) {
+        var myModal = new bootstrap.Modal(document.getElementById('deleteWindowModal'), {
+            keyboard: false
+        })
+        var link = "/delete-responsibility/" + id;
+        document.getElementById("delete-responsibility-modal").href=link;
+        myModal.show()
+    }
+</script>
 </html>
