@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <label for="user_id" class="form-label">Исполнитель</label>
                         <select class="form-select" th:field="*{user.id}" id="user_id">
-                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
+                            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname} + ' ' + ${#strings.isEmpty(user.jobTitle) ? '' : ' (' + user.jobTitle + ')'}"></option>
                         </select>
                         <label for="deputy_id" class="form-label">Заместитель</label>
                         <select class="form-select" th:field="*{deputy}" id="deputy_id">
