@@ -11,7 +11,7 @@
                 <form action="#" th:action="@{/add-responsibility}" th:object="${responsibility}" method="post">
                     <p>Поля, помеченные * обязательны для заполнения</p>
                     <div class="mb-3">
-                        <label for="user_id" class="form-label">Исполнитель</label>
+                        <label for="user_id" class="form-label">Исполнитель (должность)</label>
                         <select class="form-select" th:field="*{user.id}" id="user_id">
                             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname} + ' ' + ${#strings.isEmpty(user.jobTitle) ? '' : ' (' + user.jobTitle + ')'}"></option>
                         </select>
