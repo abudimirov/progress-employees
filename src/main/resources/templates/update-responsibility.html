@@ -22,6 +22,25 @@
                             <option th:value="null">Отсутствует</option>
                             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname}"></option>
                         </select>
+                        <label for="from_user" class="form-label">От кого (для выбора нескольких значений зажмите Ctrl)</label>
+                        <select class="form-control selectpicker" th:field="*{fromUser}" id="from_user" multiple>
+
+                            <option th:each="user : ${users}"
+                                    th:value="${user.id}"
+                                    th:text="${user.lastname + ' ' + user.firstname}">dip
+                            </option>
+
+                        </select>
+
+                        <label for="to_user" class="form-label">Для кого (для выбора нескольких значений зажмите Ctrl)</label>
+                        <select class="form-control selectpicker" th:field="*{toUser}" id="to_user" multiple>
+
+                            <option th:each="user : ${users}"
+                                    th:value="${user.id}"
+                                    th:text="${user.lastname + ' ' + user.firstname}">dip
+                            </option>
+
+                        </select>
                         <label for="link" class="form-label">Ссылка</label>
                         <input type="text" class="form-control" th:field="*{link}" id="link" placeholder="Ссылка">
                         <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></div>

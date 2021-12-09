@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,6 +22,14 @@ public class Responsibility {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "deputy_user_id")
     private User deputy;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "from_user_id")
+    private List<User> fromUser;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "to_user_id")
+    private List<User> toUser;
 
     private String link;
 

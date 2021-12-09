@@ -20,6 +20,8 @@
                             <th></th>
                             <th>Исполнитель</th>
                             <th>Заместитель</th>
+                            <th>От кого</th>
+                            <th>Для кого</th>
                             <th>Ссылка</th>
                             <th>Описание</th>
                             <th></th>
@@ -33,6 +35,12 @@
                             </td>
                             <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
                             <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                            <td>
+                                <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            </td>
+                            <td>
+                                <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            </td>
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
                             <td>
@@ -59,6 +67,8 @@
                             <th>Исполнитель</th>
                             <th>Должность</th>
                             <th>Заместитель</th>
+                            <th>От кого</th>
+                            <th>Для кого</th>
                             <th>Ссылка</th>
                             <th>Описание</th>
                             <th></th>
@@ -73,6 +83,12 @@
                             <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
                             <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                             <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                            <td>
+                                <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            </td>
+                            <td>
+                                <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            </td>
                             <td th:text="${responsibility.link}"></td>
                             <td th:text="${responsibility.description}"></td>
                             <td>
