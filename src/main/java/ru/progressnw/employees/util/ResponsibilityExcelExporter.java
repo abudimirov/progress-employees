@@ -7,16 +7,19 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.progressnw.employees.model.Responsibility;
+import ru.progressnw.employees.model.User;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ResponsibilityExcelExporter {
-    private XSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Responsibility> listResponsibilityDescription;
+    private final List<Responsibility> listResponsibilityDescription;
 
     public ResponsibilityExcelExporter(List<Responsibility> listResponsibilityDescription) {
         this.listResponsibilityDescription = listResponsibilityDescription;
@@ -24,7 +27,7 @@ public class ResponsibilityExcelExporter {
     }
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Users");
+        sheet = workbook.createSheet("Обязанности");
 
         Row row = sheet.createRow(0);
 
@@ -33,8 +36,12 @@ public class ResponsibilityExcelExporter {
         font.setBold(true);
         font.setFontHeight(16);
         style.setFont(font);
-
-        createCell(row, 0, "Описание", style);
+        Set<User> filteredusers = new HashSet<>();
+        listResponsibilityDescription.forEach(responsibility -> filteredusers.add(responsibility.getUser()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Обязанности сотрудников - ");
+        filteredusers.forEach(user -> sb.append(user.getLastname()).append(' ').append(user.getFirstname()).append(';'));
+        createCell(row, 0, sb.toString(), style);
     }
 
     private void createCell(Row row, int columnCount, String value, CellStyle style) {

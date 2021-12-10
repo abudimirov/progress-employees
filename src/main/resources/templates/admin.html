@@ -67,10 +67,10 @@
                         <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td>
-                            <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
                         </td>
                         <td>
-                            <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
                         </td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
@@ -122,10 +122,10 @@
                         <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
                         <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
                         <td>
-                            <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
                         </td>
                         <td>
-                            <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename}"></span></div>
+                            <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
                         </td>
                         <td th:text="${responsibility.link}"></td>
                         <td th:text="${responsibility.description}"></td>
