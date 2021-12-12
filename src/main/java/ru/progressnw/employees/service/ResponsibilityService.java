@@ -1,6 +1,5 @@
 package ru.progressnw.employees.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.progressnw.employees.model.Responsibility;
 import ru.progressnw.employees.model.User;
@@ -12,8 +11,11 @@ import java.util.List;
 @Service
 public class ResponsibilityService {
 
-    @Autowired
-    private ResponsibilityRepository responsibilityRepository;
+    private final ResponsibilityRepository responsibilityRepository;
+
+    public ResponsibilityService(ResponsibilityRepository responsibilityRepository) {
+        this.responsibilityRepository = responsibilityRepository;
+    }
 
     public List<Responsibility> getResponsibilityListByUsers(List<User> users) {
         List<Responsibility> responsibilities = new ArrayList<>();

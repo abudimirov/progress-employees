@@ -1,7 +1,6 @@
 package ru.progressnw.employees.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.Responsibility;
-import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
@@ -25,7 +23,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,8 +34,6 @@ public class AdminController {
     private final UserRepository userRepository;
     private final ResponsibilityRepository responsibilityRepository;
     private final DepartmentRepository departmentRepository;
-
-    @Autowired
     private final ResponsibilityService responsibilityService;
 
     @Resource(name = "filteredUsers")

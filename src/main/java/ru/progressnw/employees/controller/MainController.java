@@ -1,7 +1,6 @@
 package ru.progressnw.employees.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +20,7 @@ public class MainController {
 
     private final UserRepository userRepository;
     private final ResponsibilityRepository responsibilityRepository;
-
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/")
     public String showMyResponsibilityList(Model model) {
