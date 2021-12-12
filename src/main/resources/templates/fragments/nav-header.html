@@ -6,7 +6,7 @@
 </head>
 <body>
     <header th:fragment="nav_header" class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <div class="d-flex align-items-center col-md-1 mb-2 mb-md-0 text-dark text-decoration-none">
             <span>Развитие</span>
         </div>
 
@@ -14,6 +14,7 @@
             <li sec:authorize="hasRole('ADMIN')"><a href="/admin" class="nav-link px-2 link-dark">Админ-панель</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/registration" class="nav-link px-2 link-dark"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Зарегистрировать сотрудника</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/add-responsibility" class="nav-link px-2 link-dark"><i class="fa fa-plus-circle" aria-hidden="true"></i> Добавить обязанность</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a href="/admin/departments" class="nav-link px-2 link-dark"><i class="fa fa-users" aria-hidden="true"></i> Отделы</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
