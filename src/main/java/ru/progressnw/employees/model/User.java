@@ -34,4 +34,7 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Department department;
 }

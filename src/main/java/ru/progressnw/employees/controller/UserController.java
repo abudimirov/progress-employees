@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
+import ru.progressnw.employees.repository.DepartmentRepository;
 import ru.progressnw.employees.repository.UserRepository;
 
 import javax.annotation.Resource;
@@ -21,12 +22,14 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Resource(name = "filteredUsers")
     private List<User> filteredUsersList;
 
     @GetMapping("/registration")
-    public String registration(User user) {
+    public String registration(User user, Model model) {
+        model.addAttribute("departments", departmentRepository.findAll());
         return "auth/registration";
     }
 
@@ -50,6 +53,7 @@ public class UserController {
             .orElseThrow(() -> new IllegalArgumentException("Неверный user id:" + id));
 
         model.addAttribute("user", user);
+        model.addAttribute("departments", departmentRepository.findAll());
         return "edit-user";
     }
 

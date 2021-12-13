@@ -1,5 +1,6 @@
 package ru.progressnw.employees.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.progressnw.employees.model.Responsibility;
 import ru.progressnw.employees.model.User;
@@ -9,19 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ResponsibilityService {
 
     private final ResponsibilityRepository responsibilityRepository;
 
-    public ResponsibilityService(ResponsibilityRepository responsibilityRepository) {
-        this.responsibilityRepository = responsibilityRepository;
-    }
-
     public List<Responsibility> getResponsibilityListByUsers(List<User> users) {
         List<Responsibility> responsibilities = new ArrayList<>();
-        for (User user : users) {
-            responsibilities.addAll(responsibilityRepository.findByUser(user));
-        }
+        users.forEach(user -> responsibilities.addAll(responsibilityRepository.findByUser(user)));
+        
         return responsibilities;
     }
 
