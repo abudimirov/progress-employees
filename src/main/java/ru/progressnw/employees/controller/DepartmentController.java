@@ -12,6 +12,8 @@ import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
 import ru.progressnw.employees.repository.UserRepository;
+import ru.progressnw.employees.service.DepartmentService;
+import ru.progressnw.employees.service.UserService;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -22,6 +24,8 @@ public class DepartmentController {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
+    private final UserService userService;
+    private final DepartmentService departmentService;
 
     @GetMapping("/admin/departments")
     public String showNewDepartmentForm(Department department, Model model) {
@@ -37,6 +41,8 @@ public class DepartmentController {
             model.addAttribute("departments", departmentRepository.findAll());
             return "departments/main-departments";
         }
+        Optional<User> userInDb = userRepository.findById(department.getManager().getId());
+        userInDb.ifPresent(userService::addManagerRole);
         departmentRepository.save(department);
         return "redirect:/admin/departments";
     }
@@ -58,8 +64,15 @@ public class DepartmentController {
             model.addAttribute("users", userRepository.findAll());
             return "departments/update-department";
         }
+        User previousAdmin = departmentRepository.findById(id).get().getManager();
+        if (!departmentService.userIsAnotherDepartmentAdmin(previousAdmin, department)) {
+            userService.removeManagerRole(previousAdmin);
+        }
         Optional<User> userInDb = userRepository.findById(department.getManager().getId());
-        userInDb.ifPresent(department::setManager);
+        if (userInDb.isPresent()) {
+            department.setManager(userInDb.get());
+            userService.addManagerRole(userInDb.get());
+        }
         departmentRepository.save(department);
         return "redirect:/admin/departments";
     }
