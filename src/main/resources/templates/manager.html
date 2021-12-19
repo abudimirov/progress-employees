@@ -10,7 +10,13 @@
             <h2 th:case="null">Пока нет ни одного сотрудника!</h2>
             <div th:case="*" class="table-responsive">
                 <table class="table table-striped caption-top">
-                    <caption>Сотрудники</caption>
+                    <caption>
+                        Сотрудники (
+                        <span th:each="department : ${managedDepartments}">
+                            <span th:text="${department.name} + ';'"></span>
+                        </span>
+                        )
+                    </caption>
                     <thead>
                     <tr>
                         <th>Фамилия</th>

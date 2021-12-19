@@ -11,11 +11,12 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li sec:authorize="!hasRole('ADMIN')"><a href="/" class="nav-link px-2 link-dark">Главная</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/admin" class="nav-link px-2 link-dark">Админ-панель</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/registration" class="nav-link px-2 link-dark"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Зарегистрировать сотрудника</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/add-responsibility" class="nav-link px-2 link-dark"><i class="fa fa-plus-circle" aria-hidden="true"></i> Добавить обязанность</a></li>
             <li sec:authorize="hasRole('ADMIN')"><a href="/admin/departments" class="nav-link px-2 link-dark"><i class="fa fa-users" aria-hidden="true"></i> Отделы</a></li>
-            <li sec:authorize="hasAuthority('MANAGER')"><a href="/manager" class="nav-link px-2 link-dark"><i class="fa fa-users" aria-hidden="true"></i> Админ-панель менеджера</a></li>
+            <li sec:authorize="hasAuthority('MANAGER')"><a href="/manager" class="nav-link px-2 link-dark"><i class="fa fa-users" aria-hidden="true"></i> Начальник отдела</a></li>
             <li sec:authorize="hasAuthority('MANAGER')"><a href="/add-responsibility" class="nav-link px-2 link-dark"><i class="fa fa-plus-circle" aria-hidden="true"></i> Добавить обязанность</a></li>
         </ul>
 
