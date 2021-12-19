@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
@@ -64,8 +65,7 @@ public class UserController {
             user.setId(id);
             return "edit-user";
         }
-        //TODO Убрать хардкод одной роли
-        user.setRoles(Collections.singleton(Role.USER));
+        user.setRoles(userRepository.findById(id).get().getRoles());
         userRepository.save(user);
         return "redirect:/admin";
     }

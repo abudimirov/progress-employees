@@ -4,6 +4,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 
@@ -20,10 +21,11 @@ public class UserService {
         return username;
     }
 
-    public User addManagerRole(User user) {
+    public User addManagerRole(User user, Department department) {
         Set<Role> roles = user.getRoles();
         roles.add(Role.MANAGER);
         user.setRoles(roles);
+        user.setDepartment(department);
         return user;
     }
 

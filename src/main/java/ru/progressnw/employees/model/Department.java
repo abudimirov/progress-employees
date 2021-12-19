@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -17,8 +18,6 @@ public class Department {
     @NotBlank(message = "Необходимо название отдела")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", nullable = false)
-    //@NotNull(message = "Необходимо задать начальника отдела")
-    private User manager;
+    @NotNull(message = "Необходимо задать начальника отдела")
+    private long managerId;
 }

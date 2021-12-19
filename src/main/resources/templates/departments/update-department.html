@@ -15,7 +15,7 @@
                         <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Название отдела">
                         <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                         <label for="manager_id" class="form-label">Начальник отдела *</label>
-                        <select class="form-select" th:field="*{manager.id}" id="manager_id">
+                        <select class="form-select" th:field="*{managerId}" id="manager_id">
                             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname} + ' ' + ${#strings.isEmpty(user.jobTitle) ? '' : ' (' + user.jobTitle + ')'}"></option>
                         </select>
                     </div>

@@ -18,7 +18,7 @@ public class DepartmentService {
         List<Department> departmentList = departmentRepository.findAll();
         for (Department d : departmentList) {
             if (d.getId() != department.getId()) {
-                isAnotherAdmin = d.getManager().getId() == user.getId();
+                isAnotherAdmin = d.getManagerId() == user.getId();
             }
         }
         return isAnotherAdmin;

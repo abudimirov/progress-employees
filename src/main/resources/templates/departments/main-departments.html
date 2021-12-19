@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="manager_id" class="form-label">Начальник отдела *</label>
-                                <select class="form-select" th:field="*{manager.id}" id="manager_id">
+                                <select class="form-select" th:field="*{managerId}" id="manager_id">
                                     <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.lastname + ' ' + user.firstname} + ' ' + ${#strings.isEmpty(user.jobTitle) ? '' : ' (' + user.jobTitle + ')'}"></option>
                                 </select>
                             </div>
@@ -40,15 +40,13 @@
                     <thead>
                     <tr>
                         <th>Название</th>
-                        <th>Менеджер</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="department : ${departments}">
                         <td th:text="${department.name}"></td>
-                        <td th:text="${department.manager.lastname + ' ' + department.manager.firstname}"></td>
-                        <td><a th:href="@{/admin/departments/{id}(id=${department.id})}" title="Редактировать данные отдела"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/admin/departments/{id}(id=${department.id})}" title="Редактировать данные отдела"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Редактировать</a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -41,8 +41,8 @@ public class DepartmentController {
             model.addAttribute("departments", departmentRepository.findAll());
             return "departments/main-departments";
         }
-        Optional<User> userInDb = userRepository.findById(department.getManager().getId());
-        userInDb.ifPresent(userService::addManagerRole);
+        Optional<User> userInDb = userRepository.findById(department.getManagerId());
+        userInDb.ifPresent(user -> userService.addManagerRole(user, department));
         departmentRepository.save(department);
         return "redirect:/admin/departments";
     }
@@ -64,14 +64,14 @@ public class DepartmentController {
             model.addAttribute("users", userRepository.findAll());
             return "departments/update-department";
         }
-        User previousAdmin = departmentRepository.findById(id).get().getManager();
+        User previousAdmin = userRepository.findById(departmentRepository.findById(id).get().getManagerId()).get();
         if (!departmentService.userIsAnotherDepartmentAdmin(previousAdmin, department)) {
             userService.removeManagerRole(previousAdmin);
         }
-        Optional<User> userInDb = userRepository.findById(department.getManager().getId());
+        Optional<User> userInDb = userRepository.findById(department.getManagerId());
         if (userInDb.isPresent()) {
-            department.setManager(userInDb.get());
-            userService.addManagerRole(userInDb.get());
+            department.setManagerId(userInDb.get().getId());
+            userService.addManagerRole(userInDb.get(), department);
         }
         departmentRepository.save(department);
         return "redirect:/admin/departments";
