@@ -6,6 +6,8 @@ import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,5 +24,15 @@ public class DepartmentService {
             }
         }
         return isAnotherAdmin;
+    }
+
+    public List<Department> getDepartmentListByManager(User manager) {
+        List<Department> departments = new ArrayList<>(Collections.emptyList());
+        for (Department department : departmentRepository.findAll()) {
+            if (department.getManagerId() == manager.getId()) {
+                departments.add(department);
+            }
+        }
+        return departments;
     }
 }
