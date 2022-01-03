@@ -6,9 +6,7 @@ import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +31,7 @@ public class DepartmentService {
                 departments.add(department);
             }
         }
+        departments.sort(Comparator.comparing(Department::getName, Comparator.comparing(s -> s.toLowerCase(Locale.ROOT))));
         return departments;
     }
 }

@@ -33,7 +33,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAllByOrderByLastname());
+        model.addAttribute("users", userRepository.findAllByOrderByDepartmentNameAscLastnameAsc());
         model.addAttribute("responsibilities", responsibilityRepository.findAll(Sort.by(Sort.Direction.ASC, "user.lastname")
             .and(Sort.by(Sort.Direction.ASC, "description"))));
         model.addAttribute("filteredResponsibility", responsibilityService.getResponsibilityListByUsers(filteredUsersList));

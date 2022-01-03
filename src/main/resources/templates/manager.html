@@ -19,9 +19,8 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th>Фамилия</th>
-                        <th>Имя</th>
-                        <th>Отчество</th>
+                        <th>Сотрудник</th>
+                        <th>Отдел</th>
                         <th>Должность</th>
                         <th>Включен</th>
                         <th></th>
@@ -29,9 +28,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="user : ${users}">
-                        <td th:text="${user.lastname}"></td>
-                        <td th:text="${user.firstname}"></td>
-                        <td th:text="${user.middlename}"></td>
+                        <td th:text="${user.lastname} + ' ' + ${user.firstname} + ' ' + ${user.middlename}"></td>
+                        <td th:text="${user.department ne null} ? ${user.department.getName()} : 'Нет'"></td>
                         <td th:text="${user.jobTitle ne null} ? ${user.jobTitle} : 'Нет'"></td>
                         <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
                         <td><a th:href="@{/users/{id}(id=${user.id})}" title="Редактировать данные сотрудника"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>

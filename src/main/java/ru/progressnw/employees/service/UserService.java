@@ -49,7 +49,7 @@ public class UserService {
     public List<User> getUsersByManager(User manager) {
         List<User> users = new ArrayList<>(Collections.emptyList());
         List<Department> departments = departmentService.getDepartmentListByManager(manager);
-        departments.forEach(department -> users.addAll(userRepository.findAllByDepartment(department)));
+        departments.forEach(department -> users.addAll(userRepository.findAllByDepartmentOrderByLastname(department)));
         return users;
     }
 }
