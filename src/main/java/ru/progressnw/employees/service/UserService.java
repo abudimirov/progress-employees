@@ -52,4 +52,13 @@ public class UserService {
         departments.forEach(department -> users.addAll(userRepository.findAllByDepartmentOrderByLastname(department)));
         return users;
     }
+
+    public boolean isAdmin() {
+        boolean isAdmin = false;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            isAdmin = authentication.getName().equals("admin");
+        }
+        return isAdmin;
+    }
 }

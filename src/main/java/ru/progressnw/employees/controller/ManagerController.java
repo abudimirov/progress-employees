@@ -11,7 +11,10 @@ import ru.progressnw.employees.service.DepartmentService;
 import ru.progressnw.employees.service.ResponsibilityService;
 import ru.progressnw.employees.service.UserService;
 
+import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +25,9 @@ public class ManagerController {
     private final ResponsibilityService responsibilityService;
     private final DepartmentService departmentService;
 
+    @Resource(name = "filteredUsers")
+    private Map<String, List<User>> filteredUsersList;
+
     @GetMapping("/manager")
     public String showUserList(Model model) {
         User manager = userRepository.findByUsername(userService.getLoggedUsername());
@@ -29,6 +35,8 @@ public class ManagerController {
         model.addAttribute("managedDepartments", departmentService.getDepartmentListByManager(manager));
         model.addAttribute("users", usersList);
         model.addAttribute("responsibilities", responsibilityService.getResponsibilityListByUsers(usersList));
+        model.addAttribute("filteredResponsibility", responsibilityService.getResponsibilityListByUsers(filteredUsersList.getOrDefault(userService.getLoggedUsername(), Collections.emptyList())));
+        model.addAttribute("filteredUsers", filteredUsersList.getOrDefault(userService.getLoggedUsername(), Collections.emptyList()));
         return "manager";
     }
 }
