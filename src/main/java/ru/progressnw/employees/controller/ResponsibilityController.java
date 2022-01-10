@@ -14,6 +14,7 @@ import ru.progressnw.employees.model.Responsibility;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.ResponsibilityRepository;
 import ru.progressnw.employees.repository.UserRepository;
+import ru.progressnw.employees.service.UserService;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class ResponsibilityController {
     private final ResponsibilityRepository responsibilityRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/add-responsibility")
     public String showNewResponsibilityForm(Responsibility responsibility, Model model) {
@@ -37,7 +39,7 @@ public class ResponsibilityController {
         }
 
         responsibilityRepository.save(responsibility);
-        return isAdmin() ? "redirect:/admin" : "redirect:/";
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping("/edit-responsibility/{id}")
@@ -60,7 +62,7 @@ public class ResponsibilityController {
         userInDb.ifPresent(responsibility::setUser);
 
         responsibilityRepository.save(responsibility);
-        return isAdmin() ? "redirect:/admin" : "redirect:/";
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping("/delete-responsibility/{id}")
@@ -68,7 +70,7 @@ public class ResponsibilityController {
         Responsibility responsibility = responsibilityRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Invalid responsibility Id:" + id));
         responsibilityRepository.delete(responsibility);
-        return isAdmin() ? "redirect:/admin" : "redirect:/";
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 
     @GetMapping("/block-responsibility/{id}")
@@ -77,15 +79,6 @@ public class ResponsibilityController {
             .orElseThrow(() -> new IllegalArgumentException("Invalid responsibility Id:" + id));
         responsibility.setBlocked(!responsibility.isBlocked());
         responsibilityRepository.save(responsibility);
-        return isAdmin() ? "redirect:/admin" : "redirect:/";
-    }
-
-    private boolean isAdmin() {
-        boolean isAdmin = false;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            isAdmin = authentication.getName().equals("admin");
-        }
-        return isAdmin;
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/";
     }
 }

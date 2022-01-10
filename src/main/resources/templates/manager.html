@@ -23,6 +23,7 @@
                         <th>Отдел</th>
                         <th>Должность</th>
                         <th>Включен</th>
+                        <th>Фильтровать</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -32,6 +33,7 @@
                         <td th:text="${user.department ne null} ? ${user.department.getName()} : 'Нет'"></td>
                         <td th:text="${user.jobTitle ne null} ? ${user.jobTitle} : 'Нет'"></td>
                         <td th:text="${user.active} ? 'Да' : 'Нет'"></td>
+                        <td><a th:href="@{/filter/{id}(id=${user.id})}"><span th:text="${#lists.contains(filteredUsers, user) ? 'Убрать' : 'Выбрать'}">Кнопка</span></a></td>
                         <td><a th:href="@{/users/{id}(id=${user.id})}" title="Редактировать данные сотрудника"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                     </tr>
                     </tbody>
@@ -39,6 +41,64 @@
             </div>
         </div>
 
+        <div th:switch="${filteredResponsibility}">
+            <div th:unless="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
+                <table class="table table-striped caption-top">
+                    <caption>Фильтрованные обязанности</caption>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Исполнитель</th>
+                        <th>Должность</th>
+                        <th>Заместитель</th>
+                        <th>От кого</th>
+                        <th>Для кого</th>
+                        <th>Ссылка</th>
+                        <th>Описание</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="responsibility : ${filteredResponsibility}">
+                        <td>
+                            <a th:href="@{/block-responsibility/{id}(id=${responsibility.id})}">
+                                <span th:if="${responsibility.isBlocked == true}"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <span th:if="${responsibility.isBlocked == false}"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
+                        <td th:text="${responsibility.user.lastname  + ' ' + responsibility.user.firstname + ' ' + responsibility.user.middlename}"></td>
+                        <td th:text="${responsibility.user.jobTitle ne null} ? ${responsibility.user.jobTitle} : 'Нет'"></td>
+                        <td th:text="${responsibility.deputy ne null} ? ${responsibility.deputy.lastname  + ' ' + responsibility.deputy.firstname + ' ' + responsibility.deputy.middlename} : 'Отсутствует'"></td>
+                        <td>
+                            <div th:each="user : ${responsibility.fromUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
+                        </td>
+                        <td>
+                            <div th:each="user : ${responsibility.toUser}"><span th:text="${user.lastname + ' ' + user.firstname + ' ' + user.middlename + ';'}"></span></div>
+                        </td>
+                        <td th:text="${responsibility.link}"></td>
+                        <td th:text="${responsibility.description}"></td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a th:href="@{/edit-responsibility/{id}(id=${responsibility.id})}" title="Редактировать обязанность"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
+                        <td>
+                            <span th:unless="${responsibility.isBlocked}">
+                                <a href="#" th:onclick="'javascript:deleteResponsibility(' + ${responsibility.id} + ');'" title="Удалить обязанность"><i class="fa fa-trash-o link-danger" aria-hidden="true"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3"><a th:href="@{/responsibilities/export/excel}"><i class="fa fa-print" aria-hidden="true"></i> Скачать описания обязанностей (.xlsx)</a></div>
+            </div>
+
+        <div th:if="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
+            <div th:unless="${#lists.isEmpty(filteredUsers)}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>У выбранных пользователей нет обязанностей!</strong> Ниже все обязанности сотрудников
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped caption-top">
                     <caption>Все добавленные обязанности</caption>
@@ -89,6 +149,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
     </div>
     <div class="modal fade" id="deleteWindowModal" tabindex="-1" aria-labelledby="deleteWindowModalLabel" aria-hidden="true">

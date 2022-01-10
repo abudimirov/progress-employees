@@ -7,16 +7,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.DepartmentRepository;
 import ru.progressnw.employees.repository.UserRepository;
+import ru.progressnw.employees.service.UserService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,9 +26,10 @@ public class UserController {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
+    private final UserService userService;
 
     @Resource(name = "filteredUsers")
-    private List<User> filteredUsersList;
+    private Map<String, List<User>> filteredUsersList;
 
     @GetMapping("/registration")
     public String registration(User user, Model model) {
@@ -83,11 +86,14 @@ public class UserController {
     public String filterUser(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        if (filteredUsersList.contains(user)) {
-            filteredUsersList.remove(user);
+        List<User> filteredUsers = filteredUsersList
+            .getOrDefault(userService.getLoggedUsername(), new ArrayList<>());
+        if (filteredUsers.contains(user)) {
+            filteredUsers.remove(user);
         } else {
-            filteredUsersList.add(user);
+            filteredUsers.add(user);
         }
-        return "redirect:/admin";
+        filteredUsersList.put(userService.getLoggedUsername(), filteredUsers);
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/manager";
     }
 }
