@@ -3,7 +3,6 @@ package ru.progressnw.employees.util;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.progressnw.employees.model.Responsibility;
@@ -51,9 +50,6 @@ public class ResponsibilityExcelExporter {
         int rowCount = 1;
 
         CellStyle style = workbook.createCellStyle();
-        XSSFFont font = workbook.createFont();
-        font.setFontHeight(14);
-        style.setFont(font);
 
         for (Responsibility responsibility : listResponsibilityDescription) {
             Row row = sheet.createRow(rowCount++);
