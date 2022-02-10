@@ -32,10 +32,6 @@ public class ResponsibilityExcelExporter {
         Row row = sheet.createRow(0);
 
         CellStyle style = workbook.createCellStyle();
-        XSSFFont font = workbook.createFont();
-        font.setBold(true);
-        font.setFontHeight(16);
-        style.setFont(font);
         Set<User> filteredusers = new HashSet<>();
         listResponsibilityDescription.forEach(responsibility -> filteredusers.add(responsibility.getUser()));
         StringBuilder sb = new StringBuilder();
