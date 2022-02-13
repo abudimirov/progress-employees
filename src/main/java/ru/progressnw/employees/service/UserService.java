@@ -54,9 +54,8 @@ public class UserService {
         LinkedList<User> users = new LinkedList<>(userRepository.findAll());
         if (!isAdmin()) {
             User currentUser = userRepository.findByUsername(getLoggedUsername());
-            int currentUserIndex = users.indexOf(currentUser);
+            users.remove(currentUser);
             users.addFirst(currentUser);
-            users.remove(currentUserIndex);
         }
         return users;
     }
