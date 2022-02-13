@@ -10,10 +10,7 @@ import ru.progressnw.employees.model.Role;
 import ru.progressnw.employees.model.User;
 import ru.progressnw.employees.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +47,17 @@ public class UserService {
         List<User> users = new ArrayList<>(Collections.emptyList());
         List<Department> departments = departmentService.getDepartmentListByManager(manager);
         departments.forEach(department -> users.addAll(userRepository.findAllByDepartmentOrderByLastname(department)));
+        return users;
+    }
+
+    public LinkedList<User> getAllUsersListWithLoggedUserFirst() {
+        LinkedList<User> users = new LinkedList<>(userRepository.findAll());
+        if (!isAdmin()) {
+            User currentUser = userRepository.findByUsername(getLoggedUsername());
+            int currentUserIndex = users.indexOf(currentUser);
+            users.addFirst(currentUser);
+            users.remove(currentUserIndex);
+        }
         return users;
     }
 

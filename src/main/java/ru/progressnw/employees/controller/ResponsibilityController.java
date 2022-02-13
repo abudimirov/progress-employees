@@ -17,6 +17,7 @@ import ru.progressnw.employees.repository.UserRepository;
 import ru.progressnw.employees.service.UserService;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @Controller
@@ -28,7 +29,7 @@ public class ResponsibilityController {
 
     @GetMapping("/add-responsibility")
     public String showNewResponsibilityForm(Responsibility responsibility, Model model) {
-        model.addAttribute("users", userRepository.findAll());
+                model.addAttribute("users", userService.getAllUsersListWithLoggedUserFirst());
         return "add-responsibility";
     }
 
