@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.progressnw.employees.model.Department;
@@ -37,6 +36,9 @@ public class UserService {
         roles.add(Role.MANAGER);
         user.setRoles(roles);
         user.setDepartment(department);
+        log.info("Set manager role of {} department for user {}",
+            department.getName(),
+            user.getFirstname() + " " + user.getLastname());
         return user;
     }
 
@@ -44,6 +46,8 @@ public class UserService {
         Set<Role> roles = user.getRoles();
         roles.remove(Role.MANAGER);
         user.setRoles(roles);
+        log.info("Remove manager role for user {}",
+            user.getFirstname() + " " + user.getLastname());
         return user;
     }
 
@@ -51,6 +55,8 @@ public class UserService {
         List<User> users = new ArrayList<>(Collections.emptyList());
         List<Department> departments = departmentService.getDepartmentListByManager(manager);
         departments.forEach(department -> users.addAll(userRepository.findAllByDepartmentOrderByLastname(department)));
+        log.info("Get all users in departments that are managed by {}",
+            manager.getFirstname() + " " + manager.getLastname());
         return users;
     }
 

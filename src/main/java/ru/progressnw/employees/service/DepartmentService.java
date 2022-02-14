@@ -1,6 +1,7 @@
 package ru.progressnw.employees.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.progressnw.employees.model.Department;
 import ru.progressnw.employees.model.User;
@@ -8,6 +9,7 @@ import ru.progressnw.employees.repository.DepartmentRepository;
 
 import java.util.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DepartmentService {
@@ -21,6 +23,9 @@ public class DepartmentService {
                 isAnotherAdmin = d.getManagerId() == user.getId();
             }
         }
+        log.info("User {} is manager for department {} and several more departments",
+            user.getFirstname() + " " + user.getLastname(),
+            department.getName());
         return isAnotherAdmin;
     }
 
