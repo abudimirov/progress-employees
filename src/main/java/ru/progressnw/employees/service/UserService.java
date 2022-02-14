@@ -67,11 +67,12 @@ public class UserService {
     }
 
     public boolean isAdmin() {
-        boolean isAdmin = false;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            isAdmin = authentication.getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"));
-        }
+        boolean isAdmin = SecurityContextHolder
+            .getContext()
+            .getAuthentication()
+            .getAuthorities()
+            .stream()
+            .anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"));
         log.info("Current user is admin: " + isAdmin);
         return isAdmin;
     }

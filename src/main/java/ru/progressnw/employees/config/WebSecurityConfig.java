@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .usersByUsernameQuery("select username, password, active from users where username=?")
             .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_role ur on u.user_id = ur.user_id where u.username=?");
         auth.inMemoryAuthentication()
-            .withUser("admin").password("{noop}12345").roles("ADMIN");
+            .withUser("admin_dmitriy").password("{noop}TBxMWbzz").roles("ADMIN");
         auth.inMemoryAuthentication()
-            .withUser("admin_victor").password("{noop}12345").roles("ADMIN");
+            .withUser("admin_victor").password("{noop}G7KfRtqa").roles("ADMIN");
     }
 }
