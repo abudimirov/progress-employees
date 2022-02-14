@@ -1,5 +1,6 @@
 package ru.progressnw.employees.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class ResponsibilityExcelExporter {
     private final XSSFWorkbook workbook;
     private XSSFSheet sheet;
@@ -37,6 +39,7 @@ public class ResponsibilityExcelExporter {
         sb.append("Обязанности сотрудников - ");
         filteredusers.forEach(user -> sb.append(user.getLastname()).append(' ').append(user.getFirstname()).append(';'));
         createCell(row, 0, sb.toString(), style);
+        log.info("Create header of excel sheet");
     }
 
     private void createCell(Row row, int columnCount, String value, CellStyle style) {
@@ -55,17 +58,17 @@ public class ResponsibilityExcelExporter {
             Row row = sheet.createRow(rowCount++);
             createCell(row, 0, responsibility.getDescription(), style);
         }
+        log.info("All responsibilities placed on excel sheet");
     }
 
     public void export(HttpServletResponse response) throws IOException {
+        log.info("Start of creating an excel file for export of responsibilities");
         writeHeaderLine();
         writeDataLines();
-
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
         workbook.close();
-
         outputStream.close();
-
+        log.info("Excel sheet have been successfully exported");
     }
 }

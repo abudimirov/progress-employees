@@ -36,6 +36,9 @@ public class UserService {
         roles.add(Role.MANAGER);
         user.setRoles(roles);
         user.setDepartment(department);
+        log.info("Set manager role of {} department for user {}",
+            department.getName(),
+            user.getFirstname() + " " + user.getLastname());
         return user;
     }
 
@@ -43,6 +46,8 @@ public class UserService {
         Set<Role> roles = user.getRoles();
         roles.remove(Role.MANAGER);
         user.setRoles(roles);
+        log.info("Remove manager role for user {}",
+            user.getFirstname() + " " + user.getLastname());
         return user;
     }
 
@@ -50,6 +55,8 @@ public class UserService {
         List<User> users = new ArrayList<>(Collections.emptyList());
         List<Department> departments = departmentService.getDepartmentListByManager(manager);
         departments.forEach(department -> users.addAll(userRepository.findAllByDepartmentOrderByLastname(department)));
+        log.info("Get all users in departments that are managed by {}",
+            manager.getFirstname() + " " + manager.getLastname());
         return users;
     }
 
@@ -66,11 +73,12 @@ public class UserService {
     }
 
     public boolean isAdmin() {
-        boolean isAdmin = false;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            isAdmin = authentication.getName().equals("admin");
-        }
+        boolean isAdmin = SecurityContextHolder
+            .getContext()
+            .getAuthentication()
+            .getAuthorities()
+            .stream()
+            .anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"));
         log.info("Current user is admin: " + isAdmin);
         return isAdmin;
     }
