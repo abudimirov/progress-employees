@@ -1,6 +1,7 @@
 package ru.progressnw.employees.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import ru.progressnw.employees.repository.UserRepository;
 
 import java.util.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -25,6 +27,7 @@ public class UserService {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             username = authentication.getName();
         }
+        log.info("Current user logged with username: " + username);
         return username;
     }
 
@@ -56,6 +59,8 @@ public class UserService {
             User currentUser = userRepository.findByUsername(getLoggedUsername());
             users.remove(currentUser);
             users.addFirst(currentUser);
+            log.info("Rearranging all users list to have {} first in list",
+                currentUser.getFirstname() + " " + currentUser.getLastname());
         }
         return users;
     }
@@ -66,6 +71,7 @@ public class UserService {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             isAdmin = authentication.getName().equals("admin");
         }
+        log.info("Current user is admin: " + isAdmin);
         return isAdmin;
     }
 }
