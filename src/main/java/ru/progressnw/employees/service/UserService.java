@@ -69,7 +69,8 @@ public class UserService {
         boolean isAdmin = false;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            isAdmin = authentication.getName().equals("admin");
+            //isAdmin = authentication.getName().equals("admin");
+            isAdmin = authentication.getAuthorities().contains(Role.ADMIN);
         }
         log.info("Current user is admin: " + isAdmin);
         return isAdmin;
