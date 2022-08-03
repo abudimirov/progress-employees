@@ -96,4 +96,10 @@ public class UserController {
         filteredUsersList.put(userService.getLoggedUsername(), filteredUsers);
         return userService.isAdmin() ? "redirect:/admin" : "redirect:/manager";
     }
+
+    @GetMapping("/filter/flush")
+    public String flushUserFilter() {
+        filteredUsersList.put(userService.getLoggedUsername(), Collections.emptyList());
+        return userService.isAdmin() ? "redirect:/admin" : "redirect:/manager";
+    }
 }
