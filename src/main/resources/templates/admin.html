@@ -38,7 +38,10 @@
         <div th:switch="${filteredResponsibility}">
             <div th:unless="${#lists.isEmpty(filteredResponsibility)}" class="table-responsive">
                 <table class="table table-striped caption-top">
-                    <caption>Фильтрованные обязанности</caption>
+                    <caption>
+                        Фильтрованные обязанности
+                        <a href="/filter/flush" style="margin-left: 20px;">Убрать все фильтры</a>
+                    </caption>
                     <thead>
                     <tr>
                         <th></th>
